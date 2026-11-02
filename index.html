@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ParkSmart Smart Parking Management System">
+  <title> Smart Parking Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- LOGIN / SIGNUP SCREEN -->
+  <section class="auth-screen" id="authScreen">
+    <div class="auth-card">
+      <a class="brand auth-brand" href="#">
+        <span class="brand-icon">P</span>
+        <span>Park<span class="accent">Smart</span>
+          <small>SMART PARKING MANAGEMENT   SYSTEM</small>
+        </span>
+      </a>
+
+      <button class="theme-btn auth-theme" id="authThemeBtn" type="button"
+        aria-label="Toggle dark mode">🌙</button>
+
+      <div class="auth-heading">
+        <p class="eyebrow">WELCOME TO Smart Parking Management System</p>
+        <h1 id="authTitle">Welcome back!</h1>
+        <p class="muted" id="authSubtitle">Sign in to manage your parking dashboard.</p>
+      </div>
+
+      <form id="authForm">
+        <div id="signupFields" hidden>
+          <label for="signupName">Full name</label>
+          <input id="signupName" type="text" placeholder="Enter your name"
+            maxlength="60" autocomplete="name">
+        </div>
+
+        <label for="authEmail">Email address</label>
+        <input id="authEmail" type="email" placeholder="you@example.com"
+          autocomplete="email" required>
+
+        <label for="authPassword">Password</label>
+        <input id="authPassword" type="password" placeholder="Enter password"
+          minlength="6" autocomplete="current-password" required>
+
+        <div id="authError" class="form-message" role="alert"></div>
+        <button class="primary-btn full-btn" id="authSubmit" type="submit">
+          Sign In →
+        </button>
+      </form>
+
+      <p class="auth-switch">
+        <span id="authSwitchText">Don't have an account?</span>
+        <button id="authSwitchBtn" type="button">Create account</button>
+      </p>
+
+      <p class="auth-note">Academic demo · Data stored in this browser</p>
+    </div>
+  </section>
+
+  <!-- MAIN APPLICATION -->
+  <div class="app-shell" id="appShell" hidden>
+    <aside class="sidebar">
+      <a href="#dashboard" class="brand">
+        <span class="brand-icon">P</span>
+        <span>Park<span class="accent">Smart</span>
+          <small>SMART PARKING SYSTEM</small>
+        </span>
+      </a>
+
+      <p class="nav-label">WORKSPACE</p>
+      <a href="#dashboard" class="nav-link active">▦ &nbsp; Dashboard</a>
+      <a href="#parking" class="nav-link">▤ &nbsp; Parking Slots</a>
+      <a href="#entry" class="nav-link">＋ &nbsp; Vehicle Entry</a>
+      <a href="#records" class="nav-link">▣ &nbsp; Parking Records</a>
+
+      <div class="sidebar-bottom">
+        <div class="status-dot"></div>
+        <div><strong>System Online</strong><small>Local demo mode</small></div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">PARKING OPERATIONS / OVERVIEW</p>
+          <h1>Dashboard <span class="live-badge">● LIVE DEMO</span></h1>
+          <p class="muted">Welcome, <strong id="welcomeName">User</strong>.
+            Manage your parking space efficiently.</p>
+        </div>
+        <div class="top-actions">
+          <div class="date-box">📅 <span id="currentDate">Today</span></div>
+          <button class="theme-btn" id="themeBtn" type="button"
+            aria-label="Toggle dark mode">🌙</button>
+          <button class="secondary-btn" id="logoutBtn" type="button">Log Out ↗</button>
+          <button class="primary-btn" id="newEntryBtn" type="button">＋ New Entry</button>
+        </div>
+      </header>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-top"><span>Total Slots</span><span class="stat-icon blue">▦</span></div>
+          <h2 id="totalSlots">20</h2><p>Parking capacity</p>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Available Slots</span><span class="stat-icon green">✓</span></div>
+          <h2 id="availableSlots">20</h2><p class="green-text">Ready for parking</p>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Occupied Slots</span><span class="stat-icon orange">▣</span></div>
+          <h2 id="occupiedSlots">0</h2><p>Currently parked</p>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Total Revenue</span><span class="stat-icon purple">₹</span></div>
+          <h2 id="totalRevenue">₹0</h2><p>Collected in this demo</p>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel parking-panel" id="parking">
+          <div class="panel-heading">
+            <div><p class="eyebrow">LIVE OCCUPANCY</p><h2>Parking Layout</h2></div>
+            <span class="capacity-pill" id="capacityText">0 / 20 occupied</span>
+          </div>
+          <div class="legend">
+            <span><i class="legend-dot available"></i> Available</span>
+            <span><i class="legend-dot occupied"></i> Occupied</span>
+            <span><i class="legend-dot selected"></i> Selected</span>
+          </div>
+          <div class="entrance">↓ &nbsp; PARKING ENTRANCE &nbsp; ↓</div>
+          <div class="parking-grid" id="parkingGrid"></div>
+          <p class="hint">Select an available slot to use it in the entry form.</p>
+        </article>
+
+        <article class="panel entry-panel" id="entry">
+          <div class="panel-heading">
+            <div><p class="eyebrow">VEHICLE REGISTRATION</p><h2>New Vehicle Entry</h2></div>
+            <span class="form-icon">＋</span>
+          </div>
+
+          <form id="entryForm">
+            <label for="vehicleNumber">Vehicle Registration Number</label>
+            <input id="vehicleNumber" type="text" placeholder="e.g. PB10AB1234"
+              maxlength="15" required>
+
+            <label for="ownerName">Driver / Owner Name</label>
+            <input id="ownerName" type="text" placeholder="Enter full name"
+              maxlength="60" required>
+
+            <label for="vehicleType">Vehicle Type</label>
+            <select id="vehicleType" required>
+              <option value="Car">🚗 Car — ₹40/hour</option>
+              <option value="Bike">🏍 Bike — ₹20/hour</option>
+              <option value="SUV">🚙 SUV — ₹60/hour</option>
+            </select>
+
+            <label for="slotSelect">Parking Slot</label>
+            <select id="slotSelect" required></select>
+            <p class="hint compact">Or select a slot from the layout.</p>
+
+            <div class="rate-info">
+              <span>Hourly parking rate</span><strong id="hourlyRate">₹40 / hour</strong>
+            </div>
+            <button type="submit" class="primary-btn full-btn">Confirm Parking Entry →</button>
+            <p id="formMessage" class="form-message" role="status"></p>
+          </form>
+        </article>
+      </section>
+
+      <section class="panel records-panel" id="records">
+        <div class="panel-heading records-heading">
+          <div>
+            <p class="eyebrow">VEHICLE ACTIVITY</p><h2>Parking Records</h2>
+            <p class="muted small">Search active vehicles and manage exits.</p>
+          </div>
+          <div class="search-box">
+            <span>⌕</span><input type="search" id="searchInput"
+              placeholder="Search vehicle or owner...">
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>VEHICLE</th><th>OWNER</th><th>TYPE</th><th>SLOT</th>
+                <th>ENTRY TIME</th><th>STATUS</th><th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody id="recordsBody"></tbody>
+          </table>
+        </div>
+        <p id="emptyRecords" class="empty-state">
+          No vehicles parked yet. Add your first vehicle above.
+        </p>
+      </section>
+
+      <!-- PROFESSIONAL FOOTER -->
+      <footer class="site-footer">
+        <div class="footer-main">
+          <div class="footer-about">
+            <a href="#dashboard" class="brand footer-brand">
+              <span class="brand-icon">P</span>
+              <span>Park<span class="accent">Smart</span>
+                <small>SMART PARKING SYSTEM</small>
+              </span>
+            </a>
+            <p>A smarter way to manage parking. Track availability,
+              register vehicles and manage parking records in one place.</p>
+          </div>
+
+          <div class="footer-links">
+            <h3>Quick Links</h3>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#parking">Parking Slots</a>
+            <a href="#entry">Vehicle Entry</a>
+            <a href="#records">Parking Records</a>
+          </div>
+
+          <div class="footer-info">
+            <h3>Project Information</h3>
+            <p><span>Project</span> Smart Parking Management System</p>
+            <p><span>Technology</span> HTML · CSS · JavaScript</p>
+            <p><span>Mode</span> Academic Demo</p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© <span id="footerYear">2026</span> ParkSmart. All rights reserved.</p>
+          <p>Designed for smarter parking <span class="footer-heart">◆</span></p>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
